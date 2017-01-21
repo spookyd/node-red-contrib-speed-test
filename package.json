@@ -1,0 +1,50 @@
+{
+  "name": "node-red-contrib-speed-test",
+  "version": "0.0.1",
+  "description": "Test your download speed using speed test",
+  "license": "MIT",
+  "repository": "spooky/node-red-contrib-speed-test",
+  "author": {
+    "name": "Luke Davis",
+    "email": "lpdavis13@gmail.com",
+    "url": "lucky13.technologies"
+  },
+  "main": "speed.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "start": "node --harmony index.js",
+    "test": "mocha --reporter spec"
+  },
+  "node-red": {
+    "nodes": {
+      "fast": "speed.js"
+    }
+  },
+  "files": [
+    "speed.js"
+  ],
+  "keywords": [
+    "speed",
+    "test",
+    "tester",
+    "down",
+    "download",
+    "speed-test",
+    "speedtest",
+    "connection",
+    "internet",
+    "bandwidth",
+    "measure",
+    "check",
+    "mbps"
+  ],
+  "dependencies": {
+    "speedtest-net": "^1.2.12"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "chai": "^3.5.0"
+  }
+}

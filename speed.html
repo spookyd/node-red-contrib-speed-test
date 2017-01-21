@@ -1,0 +1,26 @@
+<script type="text/javascript">
+	RED.nodes.registerType('fast',{
+		category: 'function',
+		color: '#FFAAAA',
+		defaults: {
+			name: {value:""}
+		},
+		inputs:1,
+		outputs:1,
+		icon: "white-globe.png",
+		label: function() {
+			return this.name||"fast";
+		}
+	});
+</script>
+
+<script type="text/x-red" data-template-name="fast">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag fa-tachometer"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="fast">
+    <p>A node that uses fast-cli to create a download report from fast.com</p>
+</script>
