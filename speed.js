@@ -48,4 +48,28 @@ SpeedNode.prototype.handleError = function (node) {
 	}
 };
 
-module.exports = SpeedNode;
+// module.exports = SpeedNode;
+
+module.exports = function(RED) {
+	console.log("Setting up node");
+	function SpeedNode(config) {
+		var node = this;
+		this.on('input', msg => {
+			speed.on('downloadprogress', progress => {
+				node.status({fill: "yellow", shape: "dot", text: progress + " %"});
+			});
+
+			speed.on('data', data => {
+				msg.payload = data;
+				node.status({fill: "green", shape: "dot", text: data.speeds.download + " Mbps"});
+				node.send(msg);
+			});
+
+			speed.on('error', error => {
+				node.error(error);
+			});
+		});
+	}
+
+	RED.nodes.registerType("speed-test", SpeedNode);
+};
