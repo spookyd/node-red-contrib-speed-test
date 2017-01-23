@@ -54,6 +54,7 @@ module.exports = function(RED) {
 	console.log("Setting up node");
 	function SpeedNode(config) {
 		var node = this;
+		RED.nodes.createNode(this, config);
 		this.on('input', msg => {
 			speed.on('downloadprogress', progress => {
 				node.status({fill: "yellow", shape: "dot", text: progress + " %"});
