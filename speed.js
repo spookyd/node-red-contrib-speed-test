@@ -3,7 +3,6 @@
  */
 
 const speedTest = require('speedtest-net');
-const speed = speedTest({maxTime: 5000});
 
 var SpeedNode = function (RED) {
 	var node = this;
@@ -54,8 +53,11 @@ module.exports = function(RED) {
 	console.log("Setting up node");
 	function SpeedNode(config) {
 		var node = this;
+		var speed = {};
 		RED.nodes.createNode(this, config);
 		this.on('input', msg => {
+			speed = speedTest({maxTime: 5000});
+
 			speed.on('downloadprogress', progress => {
 				node.status({fill: "yellow", shape: "dot", text: progress + " %"});
 			});
@@ -63,11 +65,13 @@ module.exports = function(RED) {
 			speed.on('data', data => {
 				msg.payload = data;
 				node.status({fill: "green", shape: "dot", text: data.speeds.download + " Mbps"});
+				speed = null;
 				node.send(msg);
 			});
 
 			speed.on('error', error => {
 				node.error(error);
+				speed = null;
 			});
 		});
 	}
