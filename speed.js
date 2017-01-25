@@ -4,53 +4,12 @@
 
 const speedTest = require('speedtest-net');
 
-var SpeedNode = function (RED) {
-	var node = this;
-	this.msg = {};
-	RED.nodes.registerType("speed-test", function (configuration) {
-		node.config = configuration;
-		RED.nodes.createNode(node, node.config);
-		node.on('input', node.registerListeners(node));
-	});
-
-};
-
-SpeedNode.config = {};
-SpeedNode.msg = {};
-
-SpeedNode.prototype.registerListeners = function (node) {
-	return function (msg) {
-		node.msg = msg;
-		speed.on('downloadprogress', node.updateProgress(node));
-		speed.on('data', node.handleCompletion(node));
-		speed.on('error', node.handleError(node));
-	}
-};
-
-SpeedNode.prototype.updateProgress = function (node) {
-	return function (progress) {
-		node.status({fill: "yellow", shape: "dot", text: progress + " %"});
-	}
-};
-
-SpeedNode.prototype.handleCompletion = function (node) {
-	return function (data) {
-		node.msg.payload = data;
-		node.status({fill: "green", shape: "dot", text: data.speeds.download + " Mbps"});
-		node.send(node.msg);
-	}
-};
-
-SpeedNode.prototype.handleError = function (node) {
-	return function (error) {
-		node.error('Speedtest error: ' + error)
-	}
-};
-
-// module.exports = SpeedNode;
-
+/**
+ * Creates instance of Speed Node for use with Node-Red https://nodered.org
+ *
+ * @param RED - The RED instance passed in as part of the Node Red life cycle
+ */
 module.exports = function(RED) {
-	console.log("Setting up node");
 	function SpeedNode(config) {
 		var node = this;
 		var speed = {};
@@ -63,14 +22,16 @@ module.exports = function(RED) {
 			});
 
 			speed.on('data', data => {
-				msg.payload = data;
+				msg.payload.speedResults = data;
 				node.status({fill: "green", shape: "dot", text: data.speeds.download + " Mbps"});
+				// Since this is the final callback we care about, remove speed instance
 				speed = null;
 				node.send(msg);
 			});
 
 			speed.on('error', error => {
 				node.error(error);
+				// We need to , remove speed instance
 				speed = null;
 			});
 		});
