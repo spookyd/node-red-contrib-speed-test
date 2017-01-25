@@ -14,12 +14,12 @@
     "node": ">=4"
   },
   "scripts": {
-    "start": "node --harmony index.js",
-    "test": "mocha --reporter spec"
+    "start": "node --harmony speed.js",
+    "test": "mocha speed.test.js --reporter spec"
   },
   "node-red": {
     "nodes": {
-      "fast": "speed.js"
+      "speed-test": "speed.js"
     }
   },
   "files": [
@@ -45,6 +45,8 @@
   },
   "devDependencies": {
     "mocha": "^3.2.0",
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "sinon": "^1.17.6",
+    "proxyquire": "^1.7.10"
   }
 }

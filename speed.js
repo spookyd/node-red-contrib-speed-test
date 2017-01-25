@@ -2,31 +2,40 @@
  * Created by lukedavis on 1/20/17.
  */
 
-var speedTest = require('speedtest-net');
-var speed = speedTest({maxTime: 5000});
+const speedTest = require('speedtest-net');
 
-module.exports = function (RED) {
-	console.log("Setting up node");
-	function FastNode(config) {
-		RED.nodes.createNode(this, config);
+/**
+ * Creates instance of Speed Node for use with Node-Red https://nodered.org
+ *
+ * @param RED - The RED instance passed in as part of the Node Red life cycle
+ */
+module.exports = function(RED) {
+	function SpeedNode(config) {
 		var node = this;
-		this.on('input', function (msg) {
+		var speed = {};
+		RED.nodes.createNode(this, config);
+		this.on('input', msg => {
+			speed = speedTest({maxTime: 5000});
+
 			speed.on('downloadprogress', progress => {
-				console.log('Download progress:', progress);
+				node.status({fill: "yellow", shape: "dot", text: progress + " %"});
 			});
 
-			speed.on('data', function (data) {
-				console.log("Got that data " + JSON.stringify(data));
-				msg.payload = data;
-				node.status({fill: "green", shape: "ring", text: data.speeds.download + " Mbps"});
+			speed.on('data', data => {
+				msg.payload.speedResults = data;
+				node.status({fill: "green", shape: "dot", text: data.speeds.download + " Mbps"});
+				// Since this is the final callback we care about, remove speed instance
+				speed = null;
 				node.send(msg);
 			});
 
-			speed.on('error', function (error) {
-				console.error(error);
+			speed.on('error', error => {
+				node.error(error);
+				// We need to , remove speed instance
+				speed = null;
 			});
 		});
 	}
 
-	RED.nodes.registerType("speed-speed", FastNode);
+	RED.nodes.registerType("speed-test", SpeedNode);
 };
