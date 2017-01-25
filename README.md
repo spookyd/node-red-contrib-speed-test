@@ -1,4 +1,4 @@
-# node-red-contrib-fast-test [![Build Status](https://travis-ci.org/spookyd/.svg?branch=master)](https://travis-ci.org/spookyd/node-red-contrib-speed-test)
+# node-red-contrib-fast-test [![Build Status](https://travis-ci.org/spookyd/node-red-contrib-speed-test.svg?branch=master)](https://travis-ci.org/spookyd/node-red-contrib-speed-test)
 
 > Test your download speed using [speedtest.net](https://speedtest.net)
 
