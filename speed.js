@@ -37,5 +37,5 @@ module.exports = function(RED) {
 		});
 	}
 
-	RED.nodes.registerType("speed-test", SpeedNode);
+	RED.nodes.registerType("node-red-contrib-speed-test", SpeedNode);
 };
