@@ -14,8 +14,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "start": "node --harmony speed.js",
-    "test": "mocha speed.test.js --reporter spec"
+    "start": "node --harmony speed.js"
   },
   "node-red": {
     "nodes": {
@@ -26,6 +25,7 @@
     "speed.js"
   ],
   "keywords": [
+    "node-red",
     "speed",
     "test",
     "tester",
