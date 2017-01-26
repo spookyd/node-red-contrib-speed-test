@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	RED.nodes.registerType('speed-test',{
+	RED.nodes.registerType('node-red-contrib-speed-test',{
 		category: 'function',
 		color: '#FFAAAA',
 		defaults: {
@@ -9,18 +9,54 @@
 		outputs:1,
 		icon: "white-globe.png",
 		label: function() {
-			return this.name||"speed-test";
+			return this.name||"Speed Test";
 		}
 	});
 </script>
 
-<script type="text/x-red" data-template-name="fast">
+<script type="text/x-red" data-template-name="node-red-contrib-speed-test">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag fa-tachometer"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="fast">
+<script type="text/x-red" data-help-name="node-red-contrib-speed-test">
     <p>A node to create a download report from speedtest.net</p>
+    <p>Output an object <code>msg.payload.speedResults</code>,</p>
+    <p>containing an object
+     <code>
+     {
+	"speeds": {
+		"download": 7.049,
+		"upload": 6.365,
+		"originalDownload": 776298,
+		"originalUpload": 698521
+	},
+	"client": {
+		"ip": "24.160.160.132",
+		"lat": 40.0315,
+		"lon": -82.8878,
+		"isp": "TWC (now Spectrum)",
+		"isprating": 2.5,
+		"rating": 0,
+		"ispdlavg": 27.132,
+		"ispulavg": 3.742
+	},
+	"server": {
+		"host": "speedtest-a.ohiordc.rr.com",
+		"lat": 39.9611,
+		"lon": -82.9989,
+		"location": "Columbus, OH",
+		"country": "United States",
+		"cc": "US",
+		"sponsor": "Time Warner Cable",
+		"distance": 12.28,
+		"distanceMi": 7.63,
+		"ping": 60.9,
+		"id": "7168"
+	}
+}
+     </code>
+    </p>
 </script>
