@@ -1,9 +1,12 @@
 {
   "name": "node-red-contrib-speed-test",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Test your download speed using speed test",
   "license": "MIT",
-  "repository": "spooky/node-red-contrib-speed-test",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spooky/node-red-contrib-speed-test.git"
+  },
   "author": {
     "name": "Luke Davis",
     "email": "lpdavis13@gmail.com",
