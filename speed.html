@@ -8,6 +8,7 @@
 		inputs:1,
 		outputs:1,
 		icon: "white-globe.png",
+		paletteLabel: "Internet Speed Test",
 		label: function() {
 			return this.name||"Speed Test";
 		}
@@ -23,7 +24,7 @@
 
 <script type="text/x-red" data-help-name="node-red-contrib-speed-test">
     <p>A node to create a download report from speedtest.net</p>
-    <p>Output an object <code>msg.payload.speedResults</code>,</p>
+    <p>Output an object <code>msg.speedResults</code>,</p>
     <p>containing an object
      <code>
      {
