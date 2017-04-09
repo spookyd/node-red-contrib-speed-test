@@ -16,13 +16,14 @@ module.exports = function(RED) {
 		RED.nodes.createNode(this, config);
 		this.on('input', msg => {
 			speed = speedTest({maxTime: 5000});
+				node.status({fill: "red", shape: "ring", text: "testing ..."});
 
 			speed.on('downloadprogress', progress => {
 				node.status({fill: "yellow", shape: "dot", text: progress + " %"});
 			});
 
 			speed.on('data', data => {
-				msg.payload.speedResults = data;
+				msg.speedResults = data;
 				node.status({fill: "green", shape: "dot", text: data.speeds.download + " Mbps"});
 				// Since this is the final callback we care about, remove speed instance
 				speed = null;
