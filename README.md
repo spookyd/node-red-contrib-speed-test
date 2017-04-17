@@ -10,7 +10,41 @@ Ensure you have [Node.js](https://nodejs.org) version 4+ installed. Then run the
 
 Currently, no configuration is needed to use this node.
 An input is required to fire the speed test; any input will trigger a new test.
-After the test is complete, the results can be found in the output, ``` msg.payload.speedResults ```.
+After the test is complete, the results can be found in the output, `msg.payload.speedResults`.
+
+### Data Model
+
+```
+  speeds: {
+    download: download bandwidth in megabits per second
+    upload: upload bandwidth in megabits per second
+    originalDownload: unadjusted download bandwidth in bytes per second
+    originalUpload: unadjusted upload bandwidth in bytes per second
+  }
+  client: {
+    ip: ip of client
+    lat: latitude of client
+    lon: longitude of client
+    isp: client's isp
+    isprating: some kind of rating
+    rating: another rating, which is always 0 it seems
+    ispdlavg: avg download speed by all users of this isp in Mbps
+    ispulavg: same for upload
+  }
+  server: {
+    host: test server url
+    lat: latitude of server
+    lon: longitude of something
+    location: name of a location, usually a city, but can be anything
+    country: name of the country
+    cc: country code
+    sponsor: who pays for the test server
+    distance: distance from client to server (SI)
+    distanceMi: distance from client to server (Imperial)
+    ping: how long it took to download a small file from the server, in ms
+    id: the id of the server
+  }
+```
 
 ## Example
 
