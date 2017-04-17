@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/spooky/node-red-contrib-speed-test.git"
+    "url": "https://github.com/spookyd/node-red-contrib-speed-test.git"
   },
   "author": {
     "name": "Luke Davis",
